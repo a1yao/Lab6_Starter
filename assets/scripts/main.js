@@ -73,7 +73,6 @@ function initFormHandler() {
   // B3. TODO - Add an event listener for the 'submit' event, which fires when the
   //            submit button is clicked
   formRef.addEventListener("submit", (event) => {
-    // event.preventDefault();
     const formData = new FormData(formRef);
     const recipeObj = {};
     const recipe = document.createElement("recipe-card");
@@ -85,9 +84,16 @@ function initFormHandler() {
     document.querySelector("main").append(recipe);
 
     const updatedRecipes = JSON.parse(localStorage.getItem("recipes"));
-    updatedRecipes.push(recipeObj);
-    console.log(updatedRecipes);
-    localStorage.setItem("recipes", JSON.stringify(updatedRecipes));
+    if(updatedRecipes == null) {
+      console.log(updatedRecipes);
+      localStorage.setItem("recipes", JSON.stringify([recipeObj]));
+    }
+    else {
+      updatedRecipes.push(recipeObj);
+      console.log(updatedRecipes);
+      localStorage.setItem("recipes", JSON.stringify(updatedRecipes));
+    }
+    
 
   })
 
@@ -107,8 +113,10 @@ function initFormHandler() {
 
   // B11. TODO - Add a click event listener to clear local storage button
   clearButton.addEventListener("click", () => {
+    console.log("hello");
     localStorage.clear();
     document.querySelector("main").innerHTML = "";
+    
   })
   // Steps B12 & B13 will occur inside the event listener from step B11
   // B12. TODO - Clear the local storage
