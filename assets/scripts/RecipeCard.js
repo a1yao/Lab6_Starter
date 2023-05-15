@@ -124,9 +124,10 @@ class RecipeCard extends HTMLElement {
   set data(data) {
     // If nothing was passed in, return
     if (!data) return;
+    console.log(data["imgSrc"].substring(1));
     // A6. TODO - Select the <article> we added to the Shadow DOM in the constructor
     this.shadowRoot.querySelector("article").innerHTML = 
-    `<img src="${data["imgSrc"]}"
+    `<img src="${data["imgSrc"].substring(1)}"
       alt=${data["imgAlt"]}>
     <p class="title">
       <a href=${data["titleLnk"]}>${data["titleTxt"]}</a> 
